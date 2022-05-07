@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/d2p.js"></script>
+</head>
+<body>
+<header>
+    <div>d2p</div>
+    <p>Translate a nucletide sequence to the amino acid sequence</p>
+</header>
+
+<section>
+    <a class="button" href="index.html">Back to the start page</a>
+
+    <h2>Results of translation</h2>
+
+    <div class="fasta_query">
+        <p><strong>Nucleotide query:</strong></p>
+        <p>{{ fasta_query }}</p>
+    </div>
+
+    <ul class="frames">
+        {% for f in translated_query %}
+        <li>
+            <p>5'3' Frame {{ loop.index }}</p>
+            <p class="frame_aa_seq">{{ f }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Results of the analysis of the longest ORFs</h2>
+
+    <table>
+        <tr>
+            <th>Longest ORF</th>
+            <th colspan="2">Protein Analysis</th>
+            <th>BLAST Results</th>
+        </tr>
+        {% for f in analysed_seq %}
+        <tr>
+            <td rowspan="5">5'3' Frame {{ loop.index }}</td>
+            <td rowspan="">Molecular Weight:</td>
+            <td rowspan="">{{ f['molecular_weight'] }}</td>
+            <td rowspan="5" class="waiting" id="blast_results_{{ loop.index }}">Retrieving BLAST results...</td>
+        </tr>
+        <tr>
+            <td rowspan="">Aromaticity:</td>
+            <td rowspan="">{{ f['aromaticity'] }}</td>
+        </tr>
+        <tr>
+            <td rowspan="">Instability Index:</td>
+            <td rowspan="">{{ f['instability_index'] }}</td>
+        </tr>
+        <tr>
+            <td rowspan="">Isoelectric Point:</td>
+            <td rowspan="">{{ f['isoelectric_point'] }}</td>
+        </tr>
+        <tr>
+            <td rowspan="">Secondary Structure Fraction:</td>
+            <td rowspan="">
+                <ul>
+                    <li>Amino acids in Helix (V, I, Y, F, W, L): {{ (f['secondary_structure_fraction'][0] * 100)|round(2, 'floor') }}%</li>
+                    <li>Amino acids in Turn (N, P, G, S): {{ (f['secondary_structure_fraction'][1] * 100)|round(2, 'floor') }}%</li>
+                    <li>Amino acids in Sheet (E, M, A, L): {{ (f['secondary_structure_fraction'][2] * 100)|round(2, 'floor') }}%</li>
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+
+<footer>
+    <div>2022</div>
+    <div>d2p by Larisa Galanzovskaia</div>
+</footer>
+
+</body>
+</html>

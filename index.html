@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+
+<header>
+    <div>d2p</div>
+    <p>Translate a nucletide sequence to the amino acid sequence</p>
+</header>
+
+<section>
+    <form name="d2p_form" id="d2p_form" action="main.cgi" method="post">
+        <input type="hidden" name="submitted" value="1">
+        <textarea name="fasta_query" id="fasta_query" placeholder="Enter a nucleotide sequence in FASTA format"></textarea>
+        <input name="submit" type="submit" id="submit" value="Submit" class="submit">
+    </form>
+</section>
+
+
+<footer>
+    <div>2022</div>
+    <div>d2p by Larisa Galanzovskaia</div>
+</footer>
+</body>
+</html>
