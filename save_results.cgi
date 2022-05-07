@@ -9,8 +9,8 @@ def main():
     form = cgi.FieldStorage()
     nt_seq = form.getvalue("nt_seq")
 
-    if nt_seq is None:
-        error = "No data provided"
+    if not validate(form):
+        error = "No data provided or data is incomplete"
         print(json.dumps([error]))
         return
 
@@ -55,6 +55,25 @@ def main():
         print(json.dumps([error, e]))
 
     print(json.dumps([res_id]))
+
+
+def validate(form):
+    if form.getvalue("nt_seq") is None:
+        return False
+
+    for i in range(3):
+        frame_id = "frame" + str(i+1)
+        if (form.getvalue(frame_id + "[aa_seq]") is None
+                or form.getvalue(frame_id + "[prot_info][secondary_structure_fraction][helix]") is None
+                or form.getvalue(frame_id + "[prot_info][secondary_structure_fraction][turn]") is None
+                or form.getvalue(frame_id + "[prot_info][secondary_structure_fraction][sheet]") is None
+                or form.getvalue(frame_id + "[prot_info][molecular_weight]") is None
+                or form.getvalue(frame_id + "[prot_info][aromaticity]") is None
+                or form.getvalue(frame_id + "[prot_info][instability_index]") is None
+                or form.getvalue(frame_id + "[prot_info][isoelectric_point]") is None):
+            return False
+    return True
+
 
 
 if __name__ == '__main__':
