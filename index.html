@@ -20,7 +20,7 @@
     <form name="d2p_form" id="d2p_form" action="main.cgi" method="post">
         <input type="hidden" name="submitted" value="1">
         <textarea name="fasta_query" id="fasta_query" placeholder="Enter a nucleotide sequence in FASTA format"></textarea>
-        <input name="submit" type="submit" id="submit" value="Submit" class="submit">
+        <input name="submit" type="submit" id="submit" value="Submit" class="submit_button"/>
     </form>
 </section>
 
@@ -28,8 +28,8 @@
     <h2>Retrieve results from the database:</h2>
     <form name="d2p_search_form" action="search.cgi" method="post">
         <input type="hidden" name="submitted" value="1">
-        <input type="number" name="result_id" placeholder="Enter the record ID"/>
-        <input name="submit" type="submit" value="Submit" class="submit">
+        <input type="number" name="record_id" placeholder="Enter the record ID"/>
+        <input name="submit" type="submit" value="Submit" class="submit_button"/>
     </form>
 </section>
 

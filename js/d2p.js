@@ -10,7 +10,7 @@ $(document).ready( function() {
         };
         for (let i = 1; i <= 3; i++) {
             dat["frame" + i]= {
-                "aa_seq": $("#frame_" + i + " p.frame_aa_seq").get(0).innerText,
+                "aa_seq": $("#frame_" + i + " p.frame_aa_seq").html(),
                 "prot_info": {
                     "molecular_weight": $(".frame_" + i + " .molecular_weight").get(0).innerText,
                     "aromaticity": $(".frame_" + i + " .aromaticity").get(0).innerText,

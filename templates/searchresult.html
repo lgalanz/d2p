@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title></title>
+    <!--[if IE]>
+    <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+</head>
+<body>
+
+<header>
+    <div>d2p</div>
+    <p>Translate a nucleotide sequence to the amino acid sequence</p>
+</header>
+
+<section>
+    <a class="button" href="index.html">< Back to the start page</a>
+
+    <h2>Search results for the record ID: {{ record_id }}</h2>
+
+    <div class="fasta_query">
+        <p><strong>Nucleotide query:</strong></p>
+        <p>{{ fasta_query }}</p>
+    </div>
+
+    <ul class="frames">
+        {% for f in translated_query %}
+        <li id="frame_{{ loop.index }}">
+            <p>{{ f.frame_name }}</p>
+            <p class="frame_aa_seq">{{ f.aa_seq }}</p>
+        </li>
+        {% endfor %}
+    </ul>
+
+    <h2>Results of the analysis of the longest ORFs</h2>
+
+    <table>
+        <tr>
+            <th>Longest ORF</th>
+            <th colspan="2">Protein Analysis</th>
+            <th>BLAST Results</th>
+        </tr>
+        {% for f in analysed_seq %}
+        <tr>
+            <td rowspan="5">{{ f.frame_name }}</td>
+            <td>Molecular Weight:</td>
+            <td class="molecular_weight">{{ f.molecular_weight }}</td>
+            <td rowspan="5"></td>
+        </tr>
+        <tr>
+            <td>Aromaticity:</td>
+            <td class="aromaticity">{{ f.aromaticity }}</td>
+        </tr>
+        <tr>
+            <td>Instability Index:</td>
+            <td class="instability_index">{{ f.instability_index }}</td>
+        </tr>
+        <tr>
+            <td>Isoelectric Point:</td>
+            <td class="isoelectric_point">{{ f.isoelectric_point }}</td>
+        </tr>
+        <tr>
+            <td>Secondary Structure Fraction:</td>
+            <td class="secondary_structure_fraction">
+                <ul>
+                    <li>Amino acids in Helix (V, I, Y, F, W, L): <span class="helix">{{ f.helix }}</span>%</li>
+                    <li>Amino acids in Turn (N, P, G, S): <span class="turn">{{ f.turn }}</span>%</li>
+                    <li>Amino acids in Sheet (E, M, A, L): <span class="sheet">{{ f.sheet }}</span>%</li>
+                </ul>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+</section>
+
+
+<footer>
+    <div>2022</div>
+    <div>d2p by Larisa Galanzovskaia</div>
+</footer>
+
+</body>
+</html>

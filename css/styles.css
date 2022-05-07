@@ -102,7 +102,7 @@ section {
     color: red;
 }
 
-#### Table ####
+/**** Table ****/
 table {
     margin-bottom: 50px !important;
 }
@@ -128,8 +128,8 @@ table ul {
     margin: 0;
 }
 
-#### Buttons/links ####
-.submit {
+/**** Buttons/links ****/
+input[type="submit"], .submit_button {
     cursor: pointer;
     color: white;
     padding: 10px 30px;
@@ -149,7 +149,7 @@ a.button {
     cursor: pointer;
 }
 
-#### Animation #####
+/**** Animation ****/
 .waiting {
   animation: loader 2s linear infinite;
 }
