@@ -14,13 +14,14 @@
 <body>
 <header>
     <div>d2p</div>
-    <p>Translate a nucletide sequence to the amino acid sequence</p>
+    <p>Translate a nucleotide sequence to the amino acid sequence</p>
 </header>
 
 <section>
-    <a class="button" href="index.html">Back to the start page</a>
+    <a class="button" href="index.html">< Back to the start page</a>
 
     <h2>Results of translation</h2>
+    <a class="button save_results">Save these results</a>
 
     <div class="fasta_query">
         <p><strong>Nucleotide query:</strong></p>
@@ -29,12 +30,13 @@
 
     <ul class="frames">
         {% for f in translated_query %}
-        <li>
+        <li id="frame_{{ loop.index }}">
             <p>5'3' Frame {{ loop.index }}</p>
             <p class="frame_aa_seq">{{ f }}</p>
         </li>
         {% endfor %}
     </ul>
+    <a class="button save_results">Save these results</a>
 
     <h2>Results of the analysis of the longest ORFs</h2>
 
@@ -45,36 +47,37 @@
             <th>BLAST Results</th>
         </tr>
         {% for f in analysed_seq %}
-        <tr>
+        <tr class="frame_{{ loop.index }}">
             <td rowspan="5">5'3' Frame {{ loop.index }}</td>
-            <td rowspan="">Molecular Weight:</td>
-            <td rowspan="">{{ f['molecular_weight'] }}</td>
+            <td>Molecular Weight:</td>
+            <td class="molecular_weight">{{ f['molecular_weight'] }}</td>
             <td rowspan="5" class="waiting" id="blast_results_{{ loop.index }}">Retrieving BLAST results...</td>
         </tr>
-        <tr>
-            <td rowspan="">Aromaticity:</td>
-            <td rowspan="">{{ f['aromaticity'] }}</td>
+        <tr class="frame_{{ loop.index }}">
+            <td>Aromaticity:</td>
+            <td class="aromaticity">{{ f['aromaticity'] }}</td>
         </tr>
-        <tr>
-            <td rowspan="">Instability Index:</td>
-            <td rowspan="">{{ f['instability_index'] }}</td>
+        <tr class="frame_{{ loop.index }}">
+            <td>Instability Index:</td>
+            <td class="instability_index">{{ f['instability_index'] }}</td>
         </tr>
-        <tr>
-            <td rowspan="">Isoelectric Point:</td>
-            <td rowspan="">{{ f['isoelectric_point'] }}</td>
+        <tr class="frame_{{ loop.index }}">
+            <td>Isoelectric Point:</td>
+            <td class="isoelectric_point">{{ f['isoelectric_point'] }}</td>
         </tr>
-        <tr>
-            <td rowspan="">Secondary Structure Fraction:</td>
-            <td rowspan="">
+        <tr class="frame_{{ loop.index }}">
+            <td>Secondary Structure Fraction:</td>
+            <td class="secondary_structure_fraction">
                 <ul>
-                    <li>Amino acids in Helix (V, I, Y, F, W, L): {{ (f['secondary_structure_fraction'][0] * 100)|round(2, 'floor') }}%</li>
-                    <li>Amino acids in Turn (N, P, G, S): {{ (f['secondary_structure_fraction'][1] * 100)|round(2, 'floor') }}%</li>
-                    <li>Amino acids in Sheet (E, M, A, L): {{ (f['secondary_structure_fraction'][2] * 100)|round(2, 'floor') }}%</li>
+                    <li>Amino acids in Helix (V, I, Y, F, W, L): <span class="helix">{{ (f['secondary_structure_fraction'][0] * 100)|round(2, 'floor') }}</span>%</li>
+                    <li>Amino acids in Turn (N, P, G, S): <span class="turn">{{ (f['secondary_structure_fraction'][1] * 100)|round(2, 'floor') }}</span>%</li>
+                    <li>Amino acids in Sheet (E, M, A, L): <span class="sheet">{{ (f['secondary_structure_fraction'][2] * 100)|round(2, 'floor') }}</span>%</li>
                 </ul>
             </td>
         </tr>
         {% endfor %}
     </table>
+    <a class="button save_results">Save these results</a>
 </section>
 
 

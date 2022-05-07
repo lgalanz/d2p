@@ -22,18 +22,6 @@ textarea {
     height: 270px;
 }
 
-#term {
-    padding: 10px 20px;
-}
-.submit {
-    color: white;
-    padding: 10px 30px;
-    background-color: #3fadad;
-    text-decoration: none;
-    display: block;
-    border: none;
-    margin-top: 10px;
-}
 div.fasta_query p:nth-child(2) {
     color: #444444;
     letter-spacing: 0.1em;
@@ -43,26 +31,17 @@ div.fasta_query p:nth-child(2) {
     background-color: #fbedd8;
     padding: 5px 10px;
 }
-
-table {
-    margin-bottom: 50px !important;
-}
-
-table, th, td {
-  border: 1px solid;
-  border-spacing: 0;
-  border-collapse: collapse;
-  margin: 10px 0;
-}
-th {
-    font-size: 16px;
-}
-th, td {
-    padding: 5px 17px;;
-}
 h2 {
     margin: 50px 0 10px;
     font-size: 26px;
+}
+div.result, div.result_error {
+    border-left: 3px solid #3fadad;
+    padding: 10px;
+    font-size: 16px;
+}
+div.result_error {
+    border-left: 3px solid red;
 }
 
 ul.frames {
@@ -89,29 +68,12 @@ p.frame_aa_seq span.longest {
     color: red;
     font-weight: bold;
 }
-a.button {
-    color: white;
-    padding: 10px 30px;
-    background-color: #3fadad;
-    text-decoration: none;
-    display: inline-block;
-}
 header {
     border-bottom: 3px solid #646666;
     height: 45px;
     padding: 10px 20px;
     margin-bottom: 20px;
     background-color: #dbdbdb;
-}
-footer {
-    border-top: 3px solid #646666;
-    height: 45px;
-    padding: 10px 20px;
-    margin-top:auto;
-    background-color: #dbdbdb;
-}
-footer div {
-    text-align: center;
 }
 header div {
     width: 50px;
@@ -123,21 +85,42 @@ header p {
     margin: 0;
     font-size: 13px;
 }
+footer {
+    border-top: 3px solid #646666;
+    height: 45px;
+    padding: 10px 20px;
+    margin-top:auto;
+    background-color: #dbdbdb;
+}
+footer div {
+    text-align: center;
+}
 section {
     padding: 0 20px;
-}
-td.error {
-    border-color: black;
 }
 .error {
     color: red;
 }
-.waiting {
-  animation: loader 2s linear infinite;
+
+#### Table ####
+table {
+    margin-bottom: 50px !important;
 }
 
-@keyframes loader {
-  50% { opacity: 0; }
+table, th, td {
+  border: 1px solid;
+  border-spacing: 0;
+  border-collapse: collapse;
+  margin: 10px 0;
+}
+th {
+    font-size: 16px;
+}
+th, td {
+    padding: 5px 17px;;
+}
+td.error {
+    border-color: black;
 }
 table ul {
     list-style-type: none;
@@ -145,6 +128,35 @@ table ul {
     margin: 0;
 }
 
+#### Buttons/links ####
+.submit {
+    cursor: pointer;
+    color: white;
+    padding: 10px 30px;
+    background-color: #3fadad;
+    text-decoration: none;
+    display: block;
+    border: none;
+    margin-top: 10px;
+}
+
+a.button {
+    color: white;
+    padding: 10px 30px;
+    background-color: #3fadad;
+    text-decoration: none;
+    display: inline-block;
+    cursor: pointer;
+}
+
+#### Animation #####
+.waiting {
+  animation: loader 2s linear infinite;
+}
+
+@keyframes loader {
+  50% { opacity: 0; }
+}
 .lds-ellipsis {
   display: inline-block;
   position: relative;
@@ -157,7 +169,7 @@ table ul {
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #fff;
+  background: #3fadad;
   animation-timing-function: cubic-bezier(0, 1, 1, 0);
 }
 .lds-ellipsis div:nth-child(1) {
