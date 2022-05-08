@@ -46,7 +46,7 @@ div.result_error {
 
 ul.frames {
     list-style-type: none;
-    width: 700px;
+    max-width: 1000px;
     padding-left: 0;
 }
 ul.frames li p:first-child {
