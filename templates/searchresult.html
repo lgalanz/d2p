@@ -7,6 +7,9 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/d2p_record.js"></script>
 </head>
 <body>
 
@@ -47,7 +50,10 @@
             <td rowspan="5">{{ f.frame_name }}</td>
             <td>Molecular Weight:</td>
             <td class="molecular_weight">{{ f.molecular_weight }}</td>
-            <td rowspan="5"></td>
+            <td rowspan="5" class="blast">
+                <p>Please refer to the BLAST search by clicking
+                    <a target='_blank' href='https://blast.ncbi.nlm.nih.gov/Blast.cgi?PROGRAM=blastp&PAGE_TYPE=BlastSearch&LINK_LOC=blasthome&QUERY='>this link</a>
+                </p></td>
         </tr>
         <tr>
             <td>Aromaticity:</td>

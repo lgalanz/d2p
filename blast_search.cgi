@@ -10,8 +10,9 @@ def main():
     print("Content-Type: application/json\n\n")
     form = cgi.FieldStorage()
     orf = form.getvalue('orf')
-    result_handle = NCBIWWW.qblast("blastp", "nr", orf, expect=0.05, hitlist_size=5)
-    f = io.StringIO(result_handle.read())
+    """ result_handle = NCBIWWW.qblast("blastp", "nr", orf[1:5], expect=0.05, hitlist_size=5)
+    f = io.StringIO(result_handle.read()) """
+    f = open("blastp_human_output.xml")
     results = NCBIXML.parse(f)
     records = list(results)
 

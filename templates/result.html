@@ -42,9 +42,9 @@
 
     <table>
         <tr>
-            <th>Longest ORF</th>
-            <th colspan="2">Protein Analysis</th>
-            <th>BLAST Results</th>
+            <th width="15%">Longest ORF</th>
+            <th colspan="2" width="50%">Protein Analysis</th>
+            <th width="35%">BLAST Results</th>
         </tr>
         {% for f in analysed_seq %}
         <tr class="frame_{{ loop.index }}">
@@ -69,9 +69,9 @@
             <td>Secondary Structure Fraction:</td>
             <td class="secondary_structure_fraction">
                 <ul>
-                    <li>Amino acids in Helix (V, I, Y, F, W, L): <span class="helix">{{ (f['secondary_structure_fraction'][0] * 100)|round(2, 'floor') }}</span>%</li>
-                    <li>Amino acids in Turn (N, P, G, S): <span class="turn">{{ (f['secondary_structure_fraction'][1] * 100)|round(2, 'floor') }}</span>%</li>
-                    <li>Amino acids in Sheet (E, M, A, L): <span class="sheet">{{ (f['secondary_structure_fraction'][2] * 100)|round(2, 'floor') }}</span>%</li>
+                    <li><strong>Amino acids in Helix (V, I, Y, F, W, L):</strong> <span class="helix">{{ (f['secondary_structure_fraction'][0] * 100)|round(2, 'floor') }}</span>%</li>
+                    <li><strong>Amino acids in Turn (N, P, G, S):</strong> <span class="turn">{{ (f['secondary_structure_fraction'][1] * 100)|round(2, 'floor') }}</span>%</li>
+                    <li><strong>Amino acids in Sheet (E, M, A, L):</strong> <span class="sheet">{{ (f['secondary_structure_fraction'][2] * 100)|round(2, 'floor') }}</span>%</li>
                 </ul>
             </td>
         </tr>
