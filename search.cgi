@@ -12,6 +12,7 @@ env = jinja2.Environment(loader=templateLoader)
 template = env.get_template('searchresult.html')
 
 
+# retrieves previously saved result by record ID
 def main():
     form = cgi.FieldStorage()
     record_id = str(form.getfirst('record_id'))

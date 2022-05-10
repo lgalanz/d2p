@@ -3,8 +3,12 @@ $(document).ready( function() {
 
     $(".save_results").click(function (e) {
         e.preventDefault();
+
+        // replace the sutton with a loader
         $(".save_results").after("<div class='lds-ellipsis'><div></div><div></div><div></div><div></div></div>");
         $(".save_results").remove();
+
+        // consolidate the data to be saved
         var dat = {
             "nt_seq": $(".fasta_query p:nth-child(2)").get(0).innerText
         };
@@ -25,16 +29,21 @@ $(document).ready( function() {
             }
         }
 
+        // send an AJAX POST request
         $.post({
                 url: './save_results.cgi',
                 dataType: 'json',
                 data: $.param(dat),
                 success: function(data) {
+                    // Inform the user about success and provide the record ID
                     $(".lds-ellipsis").after("<div class='result'>Please save the record ID that will allow you to retrieve the saved data from the database: <strong>" + data + "</strong></div>");
+                    // remove the loader
                     $(".lds-ellipsis").remove();
                 },
                 error: function(errorThrown){
+                    // Inform the user about the error
                     $(".lds-ellipsis").after("<div class='result_error'>Oops, something went wrong</div>");
+                    // remove the loader
                     $(".lds-ellipsis").remove();
                     console.log("Failed to perform blast search: " + errorThrown);
                 }
@@ -53,7 +62,9 @@ function runBlast() {
                 "orf": $("ul.frames span.longest")[x].innerText
             },
             success: function(data) {
+                // remove the animation (blinking) upon receiving results
                 $("#blast_results_" + (x + 1)).removeClass("waiting");
+                // parse the returned values
                 processJSON(data, x);
             },
             error: function(errorThrown){

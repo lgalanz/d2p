@@ -11,8 +11,11 @@ templateLoader = jinja2.FileSystemLoader(searchpath="./templates")
 env = jinja2.Environment(loader=templateLoader)
 
 
+# main() function controls the main page of the web app
 def main():
     form = cgi.FieldStorage()
+
+    # if the form was submitted run the analysis of the sequence
     if form.getvalue("submitted") == "1":
         if form.getvalue("fasta_query"):
             run_analysis(form.getvalue("fasta_query"))
@@ -21,6 +24,7 @@ def main():
             error = "Please enter a nucleotide sequence"
             print("Content-Type: text/html\n\n")
             print(template.render(error=error, debug=3))
+    # otherwise load the default page with the text area
     else:
         template = env.get_template('index.html')
         print("Content-Type: text/html\n\n")
@@ -30,6 +34,7 @@ def main():
 def run_analysis(fasta_data):
     fasta_query = get_nc_seq_from_fasta(fasta_data)
 
+    # validate the submitted query
     if not is_valid_nc_seq(fasta_query):
         template = env.get_template('index.html')
         error = "Please enter a nucleotide sequence"
@@ -40,10 +45,12 @@ def run_analysis(fasta_data):
     frame_coords = []
     longest_orf = []
     orf = []
+    # analyse three reading frames in 5'3' direction
     for i in range(3):
-        frame_coords.append(parse_fasta_query(fasta_query, i))
-        longest_orf.append(get_longest_orf(frame_coords[i]))
-        orf.append(fasta_query[longest_orf[i][0]:longest_orf[i][1]])
+        frame_coords.append(parse_fasta_query(fasta_query, i))  # identify the ORF coordinates in the sequence
+        longest_orf.append(get_longest_orf(frame_coords[i]))  # identify the coordinated of the longest ORF that will be analyzed further
+        orf.append(fasta_query[longest_orf[i][0]:longest_orf[i][1]])  # save the longest ORFs in a list
+        # translate the entire query
         translated_query.append(highlight_substring(
             translate_to_aa_seq(fasta_query, i),
             frame_coords[i],
@@ -53,7 +60,7 @@ def run_analysis(fasta_data):
     orf_util = OrfUtil(orf)
     analysed_seq = []
     for i in range(3):
-        analysed_seq.append(orf_util.get_analysed_sequence(i))
+        analysed_seq.append(orf_util.get_analysed_sequence(i))  # calculate the properties of the potential protein coded by the longest ORF
 
     template = env.get_template('result.html')
     print("Content-Type: text/html\n\n")
@@ -63,6 +70,7 @@ def run_analysis(fasta_data):
                           debug=2))
 
 
+# identify the coordinates of the longest ORF
 def get_longest_orf(coordinates):
     max_len = 0
     start = 0
@@ -80,6 +88,7 @@ def get_longest_orf(coordinates):
     return start, stop
 
 
+# parses the submitted sequence by removing the first descriptive live
 def get_nc_seq_from_fasta(query):
     if query.startswith('>'):
         lines = query.splitlines()
@@ -89,10 +98,12 @@ def get_nc_seq_from_fasta(query):
         return query
 
 
+# validate the nucleotide sequence
 def is_valid_nc_seq(query):
     return set(query.upper()) <= set('ACTG')
 
 
+# identify the coordinates of the ORFs in the sequence
 def parse_fasta_query(query, frame_count):
     query = query.upper()
     start_codon = 'ATG'
@@ -119,6 +130,7 @@ def parse_fasta_query(query, frame_count):
     return coordinates
 
 
+# translate a sequence of the nucleotides into the amino acid sequence
 def translate_to_aa_seq(query, frame_count):
     query = query.upper()
     translate_table = {
@@ -151,6 +163,7 @@ def translate_to_aa_seq(query, frame_count):
     return translated
 
 
+# highlights the longest ORF by adding a span tag around it
 def highlight_substring(str, frame_coords, longest_orf):
     if isinstance(frame_coords, list):
         index_offset = 0

@@ -1,6 +1,3 @@
-import io
-from Bio.Blast import NCBIXML
-from Bio.Blast import NCBIWWW
 from Bio.SeqUtils.ProtParam import ProteinAnalysis
 
 

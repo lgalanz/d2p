@@ -4,11 +4,13 @@ import cgi, json
 import mysql.connector
 
 
+# saves the results of the sequence analysis in the database
 def main():
     print("Content-Type: application/json\n\n")
     form = cgi.FieldStorage()
     nt_seq = form.getvalue("nt_seq")
 
+    # validate the submitted data before writing it to the database
     if not validate(form):
         error = "No data provided or data is incomplete"
         print(json.dumps([error]))
@@ -57,6 +59,7 @@ def main():
     print(json.dumps([res_id]))
 
 
+# validates the submitted data
 def validate(form):
     if form.getvalue("nt_seq") is None:
         return False
@@ -73,7 +76,6 @@ def validate(form):
                 or form.getvalue(frame_id + "[prot_info][isoelectric_point]") is None):
             return False
     return True
-
 
 
 if __name__ == '__main__':
