@@ -12,6 +12,7 @@ The program utilized the following external packages:
 * jinja2 is used for templating the frontend views
 * cgi is used to get the form inputs
 * io is used to parse the results of BLAST search
+* Bio.SeqUtils.ProtParam.ProteinAnalysis is used to analyze the resulted amino acid sequence
 * json is used in the asynchronous server calls
 * Bio.Blast.NCBIWWW, Bio.Blast.NCBIXML are used to perform the BLAST search
 * mysql.connector is used to connect to, write to and read from the database
